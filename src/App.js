@@ -1,23 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import Modal from './components/Modal';
+import useModal from './hooks/useModal';
 
 function App() {
+  const [isOpenLoginModal, openLoginModal ,closeLoginModal ] = useModal();
+  const [isOpenChatModal, openChatModal ,closeChatModal ] = useModal();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <button onClick={openLoginModal}>
+        Open Login Modal
+      </button>
+      <button onClick={openChatModal}>
+        Open Chat Modal
+      </button>
+
+
+      <Modal
+        isOpen={isOpenLoginModal} 
+        closeModal={closeLoginModal}
+        title="Login"
+      >
+        <form>
+          <input 
+            type="email"
+            placeholder="Correo"
+          />
+          <input 
+            type="password"
+            placeholder="Contraseña"
+          />
+        </form>
+      </Modal>
+
+      <Modal
+        isOpen={isOpenChatModal} 
+        closeModal={closeChatModal}
+        title="Chat"
+      >
+        <p>Hola!!</p>
+      </Modal>
+
+
     </div>
   );
 }
